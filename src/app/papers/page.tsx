@@ -54,7 +54,7 @@ function PaperCard({
               className="inline-flex text-xs font-medium text-blue-700 underline-offset-4 hover:text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               aria-label={`Open external resource for ${title} in a new tab`}
             >
-              View code / project
+              View code/project
             </a>
           )}
           {pdfHref && (

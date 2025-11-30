@@ -65,37 +65,37 @@ export default function ProjectsPage() {
 
         <div className="grid gap-5 sm:grid-cols-2">
           <ProjectCard
-            title="Symphi – Voice-First Health Companion App"
-            tag="Product · AI · TypeScript"
-            summary="Co-founded Symphi, a healthcare app that captures symptoms by voice and generates clinician-ready summaries using an AI pipeline and full-stack web app."
+            title="Paper-with-Davis"
+            tag="Research · Python"
+            summary="Visual commonsense reasoning project exploring “visibility”: constructing a dataset, defining task structure, and building an evaluation harness over multiple models."
             bullets={[
-              "Built full stack with TypeScript and Supabase/Postgres",
-              "Designed HIPAA-aware pipeline from speech to summaries",
-              "Self-hosted LLM on AWS with evaluation for accuracy and latency",
+              "Dataset construction & annotation schema",
+              "Evaluation harness across multiple LLM/VLM backends",
+              "Reproducible experiment scripts and metrics",
             ]}
-            href="https://github.com/neilt93/Symphi"
+            href="https://github.com/neilt93/Paper-with-Davis"
           />
           <ProjectCard
-            title="1:72 Scale HVAC Assembly Part Counter"
-            tag="Computer Vision · Python"
-            summary="Freelance project training a custom detector to recognise and count small parts in HVAC kits from video-to-frame datasets."
+            title="Sympli-Prototype"
+            tag="Product · TypeScript"
+            summary="Prototype for Sympli, a product aimed at simplifying complex workflows. Frontend uses modern TypeScript and React patterns focused on clarity, quick iteration, and usability."
             bullets={[
-              "Curated video-to-frame dataset for tiny parts under varied lighting",
-              "Trained custom detector with targeted augmentation",
-              "Improved robustness under noise and real-world conditions",
+              "Responsive UI with minimal, clean design",
+              "Typed components for safer iteration",
+              "Built to rapidly test product hypotheses",
             ]}
-            href="https://github.com/neilt93/HVAC-part-counter"
+            href="https://github.com/neilt93/Sympli-Prototype"
           />
           <ProjectCard
-            title="NFT Marketplace"
-            tag="Blockchain · Solidity"
-            summary="Personal NFT marketplace project with Solidity smart contracts and a custom front end for minting and trading tokens."
+            title="Crypto Signal Dashboard"
+            tag="AI x Crypto · TypeScript"
+            summary="Dashboard for monitoring high-priority crypto trading and risk signals. Combines on-chain data, exchange feeds, and custom logic into a single interface for power users."
             bullets={[
-              "Wrote Solidity contracts for minting and trading NFTs",
-              "Built front end with Vite and HTML/CSS",
-              "Focused on clear UX around listings and ownership",
+              "Signal definitions (whale flows, funding flips, etc.)",
+              "Streaming + aggregation into a clear UI",
+              "Designed for fast, actionable decision-making",
             ]}
-            href="https://github.com/neilt93/NFT-marketplace"
+            href="https://github.com/neilt93/Crypto-signal-dashboard"
           />
           <ProjectCard
             title="Hackathons & Competitions"

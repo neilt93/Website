@@ -75,11 +75,11 @@ export default function AboutPage() {
                 <span>Working on AI x crypto agents &amp; signals</span>
               </li>
               <li className="flex gap-3">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent-soft)]" />
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                 <span>Research on visual common sense &amp; evaluation</span>
               </li>
               <li className="flex gap-3">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent-soft)]" />
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                 <span>Exploring UE5 and narrative-driven projects</span>
               </li>
             </ul>
@@ -121,7 +121,7 @@ export default function AboutPage() {
                 TypeScript, SQL, Rust, Solidity
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="font-medium">AI / ML</span>: PyTorch, TensorFlow, LLM
+                <span className="font-medium">AI/ML</span>: PyTorch, TensorFlow, LLM
                 fine-tuning, evaluation pipelines, model optimisation
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
