@@ -22,7 +22,7 @@ export default function AboutPage() {
               Neil Tripathi
             </h1>
             <p className="max-w-[38rem] text-pretty text-sm leading-relaxed text-slate-700 sm:text-base">
-              CS @ NYU. I work across AI/ML, crypto, UE5, and writing, building
+              CS at NYU. I work across AI/ML, crypto, UE5, and writing, building
               agents, experiments, and systems that actually ship.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
@@ -73,7 +73,7 @@ export default function AboutPage() {
                   Neil Tripathi
                 </p>
                 <p className="text-xs text-slate-500">
-                  CS @ NYU · AI/ML, crypto, UE5, writing
+                  CS at NYU · AI/ML, crypto, UE5
                 </p>
               </div>
             </div>
@@ -81,11 +81,11 @@ export default function AboutPage() {
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Working on AI x crypto agents &amp; signals</span>
+                <span>Working AI image recognition for hvac assembly parts</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Research on visual common sense &amp; evaluation</span>
+                <span>Research on VLM common sense reasoning &amp; evaluation</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
@@ -112,8 +112,8 @@ export default function AboutPage() {
                 realities of latency, users, and actually shipping things.
               </p>
               <p>
-                I split my time between research and papers, AI x crypto
-                systems, UE5 experiments, and writing. Concretely, that&apos;s
+                I split my time between research and projects, AI
+                systems and UE5 experiments. Concretely, that&apos;s
                 looked like an NLP project on legal question answering,
                 building a visual commonsense dataset and evaluation harness
                 with Prof. Ernest Davis, and an AI x crypto signal dashboard
