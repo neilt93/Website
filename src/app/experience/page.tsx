@@ -54,32 +54,32 @@ export default function ExperiencePage() {
           <div className="space-y-6">
             <TimelineItem
               title="AI Product & Research Intern · Sentient Foundation"
-              meta="May 2025 – Aug 2025 · New York City (Hybrid)"
+              meta="May 2025 - Aug 2025 · New York City (Hybrid)"
               text="Worked on AI product and research around agentic systems: ran market research and user cohort analysis using agent usage, designed evaluation datasets for the Unhinged Dobby model, and prototyped new features with the back-end team to improve agent pipelines and reliability."
             />
             <TimelineItem
               title="Research with Prof. Ernest Davis · Visual Common Sense"
-              meta="Sep 2025 – Dec 2025 · NYU"
+              meta="Sep 2025 - Dec 2025 · NYU"
               text="Co-authored work on benchmarking commonsense visual reasoning in vision-language models, including designing diagnostic datasets around visibility and occlusion and building automatic graders to detect hallucination and inconsistency."
             />
             <TimelineItem
               title="Teaching Assistant · Database Design, NYU"
-              meta="Jan 2025 – May 2025 · New York City, NY"
+              meta="Jan 2025 - May 2025 · New York City, NY"
               text="Led in-class sessions, taught SQL, MongoDB, Flask/Jinja, and schema design, and held office hours for 50+ students encountering relational models and databases for the first time."
             />
             <TimelineItem
               title="ML/Full-Stack Intern · 4mainstreet.ai"
-              meta="May 2024 – Sep 2024 · Fremont, CA (Remote)"
+              meta="May 2024 - Sep 2024 · Fremont, CA (Remote)"
               text="Built ML and data pipelines over customer voice and text data, integrated outputs into a Flutter front end, and fine-tuned Llama 3, Gemini, and GPT-3 models while keeping cloud compute usage under control."
             />
             <TimelineItem
               title="Blockchain Developer Intern · Scroll.io"
-              meta="May 2023 – Sep 2023 · New York City, NY (Remote)"
+              meta="May 2023 - Sep 2023 · New York City, NY (Remote)"
               text="Created a Discord analytics tool for a 20K+ member community and automated data pipelines into Google BigQuery so the team could track growth and engagement."
             />
             <TimelineItem
               title="Volunteer Robotics Instructor · Out of the Box Club"
-              meta="Jan 2021 – Sep 2021 · London, UK"
+              meta="Jan 2021 - Sep 2021 · London, UK"
               text="Taught children robotics with LEGO Mindstorms, helped them build small projects, and designed the club website to showcase their work."
             />
           </div>

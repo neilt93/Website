@@ -67,7 +67,7 @@ export default function ProjectsPage() {
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           <ProjectCard
-            title="NLP Final Project – Legal MCQA"
+            title="NLP Final Project - Legal MCQA"
             tag="NLP · BERT · CaseHOLD"
             summary="NYU NLP final project on legal multiple-choice QA over the CaseHOLD dataset, using BERT-based models and a new evaluation metric that combines difficulty, confidence, and correctness."
             bullets={[

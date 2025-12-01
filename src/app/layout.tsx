@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Neil Tripathi | Portfolio",
   description:
-    "Portfolio of Neil Tripathi – CS @ NYU, working across AI/ML, crypto, UE5, and writing.",
+    "Portfolio of Neil Tripathi - CS @ NYU, working across AI/ML, crypto, UE5, and writing.",
 };
 
 export default function RootLayout({
