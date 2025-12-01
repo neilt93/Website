@@ -111,8 +111,8 @@ export default function AboutPage() {
               <p>
                 I&apos;m a computer science student at NYU who likes working
                 where AI/ML, agents, crypto, and interactive media meet. I
-                enjoy taking research-style ideas – clear problem statements,
-                evaluation, ablations – and turning them into systems that
+                enjoy taking research-style ideas like clear problem statements,
+                evaluation, and ablations, and turning them into systems that
                 handle latency, real users, and the constraints of actually
                 shipping things.
               </p>
