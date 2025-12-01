@@ -14,16 +14,11 @@ export default function ContactPage() {
           </h1>
           <p className="max-w-2xl text-sm text-slate-600">
             I&apos;m always open to talking about research, agents, crypto,
-            UE5 experiments, or interesting products to build.
+            UE5 experiments, or interesting products to build. The best way to
+            reach me is through GitHub or LinkedIn.
           </p>
 
           <div className="flex flex-wrap gap-3 pt-2">
-            <a
-              href="mailto:neiltripathi93@gmail.com"
-              className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-white shadow-[0_10px_30px_rgba(37,99,235,0.25)] transition hover:bg-[#1d4ed8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-            >
-              Email me
-            </a>
             <a
               href="https://github.com/neilt93"
               target="_blank"
@@ -46,7 +41,6 @@ export default function ContactPage() {
 
           <div className="pt-4 text-xs text-slate-500 sm:text-[0.8rem]">
             <p>Based in New York City, NY</p>
-            <p className="mt-1">Phone: (929) 476 5255</p>
           </div>
         </div>
       </section>

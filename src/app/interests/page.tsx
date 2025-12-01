@@ -69,7 +69,7 @@ export default function InterestsPage() {
             tag="Agents · Signals"
             description="I work on agentic systems that interact with crypto markets: signal engines, dashboards, and workflows where models, data, and humans all have to line up. I care about transparency, traceability, and hard guarantees more than hype."
             bullets={[
-              "On-chain / off-chain signal design",
+              "On-chain/off-chain signal design",
               "Agent workflows and safety guards",
               "Dashboards that surface what matters",
             ]}

@@ -46,10 +46,10 @@ export default function AboutPage() {
 
           <aside
             aria-label="Current focuses"
-            className="rounded-2xl border border-slate-200 bg-gradient-to-b from-white via-slate-50 to-slate-100 p-5 shadow-soft sm:p-6"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-b from-white via-slate-50 to-slate-100 p-6 shadow-soft sm:p-7 lg:p-8"
           >
             <div className="mb-4 flex items-center gap-4">
-              <div className="relative h-20 w-20 overflow-hidden rounded-full border border-slate-200 bg-slate-100 sm:h-24 sm:w-24">
+              <div className="relative h-28 w-28 overflow-hidden rounded-full border border-slate-200 bg-slate-100 sm:h-32 sm:w-32">
                 <Image
                   src="/neil-headshot.jpeg"
                   alt="Portrait of Neil Tripathi"
@@ -96,17 +96,19 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-3 text-sm leading-relaxed text-slate-700 sm:text-[0.94rem]">
               <p>
-                I&apos;m a computer science student and builder interested in
-                the intersection of machine learning, agents, crypto, and
-                interactive media. I like projects that mix research instincts
-                (clear problem statements, evaluation, ablations) with
-                real-world constraints: messy data, latency, users, and
-                shipping.
+                I&apos;m a computer science student at NYU who likes working
+                where AI/ML, agents, crypto, and interactive media intersect.
+                Most of my projects try to connect research-style thinking
+                (clear problem statements, evaluation, ablations) with the messy
+                realities of latency, users, and actually shipping things.
               </p>
               <p>
-                I split my time between research and papers, agentic AI x
-                crypto systems, UE5 and game design experiments, and writing
-                that sits closer to humanities and theory.
+                I split my time between research and papers, AI x crypto
+                systems, UE5 experiments, and writing. Concretely, that&apos;s
+                looked like an NLP project on legal question answering,
+                building a visual commonsense dataset and evaluation harness
+                with Prof. Ernest Davis, and an AI x crypto signal dashboard
+                for high-priority trading and risk workflows.
               </p>
             </div>
           </div>
@@ -117,12 +119,13 @@ export default function AboutPage() {
             </h2>
             <ul className="grid gap-2 text-sm text-slate-800 sm:text-[0.94rem]">
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="font-medium">Programming</span>: Python, Java, C,
-                TypeScript, SQL, Rust, Solidity
+                <span className="font-medium">AI/ML</span>: PyTorch, TensorFlow, LLM
+                fine-tuning, evaluation pipelines, model optimisation, BERTScore,
+                custom metrics
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="font-medium">AI/ML</span>: PyTorch, TensorFlow, LLM
-                fine-tuning, evaluation pipelines, model optimisation
+                <span className="font-medium">Programming</span>: Python, Java, C,
+                TypeScript, SQL, Rust, Solidity
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
                 <span className="font-medium">Data &amp; Cloud</span>: Postgres,

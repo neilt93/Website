@@ -35,14 +35,19 @@ function PaperCard({
         </p>
       </div>
       {bullets && bullets.length > 0 && (
-        <ul className="mt-4 space-y-1.5 text-xs text-slate-700 sm:text-[0.78rem]">
-          {bullets.map((item) => (
-            <li key={item} className="flex gap-2">
-              <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-slate-400" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-3 space-y-1.5">
+          <p className="text-[0.7rem] font-medium uppercase tracking-wide text-slate-500">
+            My role
+          </p>
+          <ul className="space-y-1.5 text-xs text-slate-700 sm:text-[0.78rem]">
+            {bullets.map((item) => (
+              <li key={item} className="flex gap-2">
+                <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-slate-400" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
       {(href || pdfHref) && (
         <div className="mt-4 flex flex-wrap gap-3">
@@ -94,7 +99,7 @@ export default function PapersPage() {
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="space-y-6">
           <PaperCard
             title="Benchmarking Commonsense Visual Reasoning in Vision-Language Models"
             role="Co-author"

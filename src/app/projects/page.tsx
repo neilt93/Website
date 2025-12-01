@@ -3,7 +3,7 @@ type ProjectCardProps = {
   tag: string;
   summary: string;
   bullets: string[];
-  href: string;
+  href?: string;
 };
 
 function ProjectCard({ title, tag, summary, bullets, href }: ProjectCardProps) {
@@ -28,17 +28,19 @@ function ProjectCard({ title, tag, summary, bullets, href }: ProjectCardProps) {
           </li>
         ))}
       </ul>
-      <div className="mt-4">
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex text-xs font-medium text-blue-700 underline-offset-4 hover:text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-          aria-label={`Open ${title} repository in a new tab`}
-        >
-          View repository
-        </a>
-      </div>
+      {href && (
+        <div className="mt-4">
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex text-xs font-medium text-blue-700 underline-offset-4 hover:text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            aria-label={`Open ${title} project in a new tab`}
+          >
+            View project
+          </a>
+        </div>
+      )}
     </article>
   );
 }
@@ -65,6 +67,17 @@ export default function ProjectsPage() {
 
         <div className="grid gap-5 sm:grid-cols-2">
           <ProjectCard
+            title="NLP Final Project – Legal MCQA"
+            tag="NLP · BERT · CaseHOLD"
+            summary="NYU NLP final project on legal multiple-choice QA over the CaseHOLD dataset, using BERT-based models and a new evaluation metric that combines difficulty, confidence, and correctness."
+            bullets={[
+              "Co-designed a weighted correctness metric for legal QA",
+              "Implemented evaluation pipeline across several BERT variants",
+              "Built scripts to analyse performance by question difficulty",
+            ]}
+            href="https://github.com/rachelren2025/NLP_Final_Project"
+          />
+          <ProjectCard
             title="Paper-with-Davis"
             tag="Research · Python"
             summary="Visual commonsense reasoning project exploring “visibility”: constructing a dataset, defining task structure, and building an evaluation harness over multiple models."
@@ -76,35 +89,34 @@ export default function ProjectsPage() {
             href="https://github.com/neilt93/Paper-with-Davis"
           />
           <ProjectCard
-            title="Sympli-Prototype"
-            tag="Product · TypeScript"
-            summary="Prototype for Sympli, a product aimed at simplifying complex workflows. Frontend uses modern TypeScript and React patterns focused on clarity, quick iteration, and usability."
-            bullets={[
-              "Responsive UI with minimal, clean design",
-              "Typed components for safer iteration",
-              "Built to rapidly test product hypotheses",
-            ]}
-            href="https://github.com/neilt93/Sympli-Prototype"
-          />
-          <ProjectCard
             title="Crypto Signal Dashboard"
             tag="AI x Crypto · TypeScript"
             summary="Dashboard for monitoring high-priority crypto trading and risk signals. Combines on-chain data, exchange feeds, and custom logic into a single interface for power users."
             bullets={[
-              "Signal definitions (whale flows, funding flips, etc.)",
-              "Streaming + aggregation into a clear UI",
-              "Designed for fast, actionable decision-making",
+              "Defined key signals across on-chain and exchange data",
+              "Implemented streaming + aggregation into a focused UI",
+              "Designed for quick, actionable decision-making",
             ]}
             href="https://github.com/neilt93/Crypto-signal-dashboard"
           />
           <ProjectCard
-            title="Hackathons & Competitions"
-            tag="Games · DeFi · dApps"
-            summary="Assorted hackathon projects across Solana, Polkadot, and Ethereum, including games and funding platforms."
+            title="1:72 Scale HVAC Assembly Part Counter"
+            tag="Computer Vision · Python"
+            summary="Freelance computer vision project to count small parts in 1:72 HVAC assembly kits from video and image data. Code is private to the client, but the approach focused on robustness under real-world conditions."
             bullets={[
-              "Finalist in a Solana game hackathon with an NFT-based game",
-              "Built Polkadot game with NFT rewards that won a prize",
-              "Developed Ethereum Kickstarter-style dApp for project funding approvals",
+              "Curated a video-to-frame dataset under varied lighting and noise",
+              "Trained and tuned a custom detector for tiny, visually similar parts",
+              "Delivered evaluation tooling and reporting while keeping client code and data private",
+            ]}
+          />
+          <ProjectCard
+            title="UE5 Narrative Prototype"
+            tag="UE5 · Interactive Media"
+            summary="A small Unreal Engine 5 prototype exploring narrative-driven spaces where player choice and systemic behaviour matter."
+            bullets={[
+              "Built a UE5 scene focused on narrative pacing and mood",
+              "Experimented with hooks for AI-driven events and dialogue",
+              "Iterated on tooling and workflows for fast prototyping",
             ]}
             href="https://github.com/neilt93?tab=repositories"
           />
