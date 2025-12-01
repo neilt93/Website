@@ -22,7 +22,7 @@ export function Nav() {
 
   return (
     <nav
-      className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6"
+      className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6"
       aria-label="Primary"
     >
       <Link
@@ -31,7 +31,7 @@ export function Nav() {
       >
         NT
       </Link>
-      <div className="flex flex-wrap justify-end gap-2 text-xs font-medium text-slate-500">
+      <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-500 sm:justify-end">
         {links.map((link) => {
           const active = isActive(link.href);
           return (
