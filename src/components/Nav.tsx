@@ -31,7 +31,7 @@ export function Nav() {
       >
         NT
       </Link>
-      <div className="hidden gap-2 text-xs font-medium text-slate-500 sm:flex">
+      <div className="flex flex-wrap justify-end gap-2 text-xs font-medium text-slate-500">
         {links.map((link) => {
           const active = isActive(link.href);
           return (

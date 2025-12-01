@@ -81,7 +81,7 @@ export default function AboutPage() {
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Working AI image recognition for hvac assembly parts</span>
+                <span>Working on AI image recognition for HVAC assembly parts</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
@@ -90,6 +90,10 @@ export default function AboutPage() {
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                 <span>Exploring UE5 and narrative-driven projects</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                <span>Exploring open deep search agents</span>
               </li>
             </ul>
           </aside>
@@ -106,18 +110,18 @@ export default function AboutPage() {
             <div className="space-y-3 text-sm leading-relaxed text-slate-700 sm:text-[0.94rem]">
               <p>
                 I&apos;m a computer science student at NYU who likes working
-                where AI/ML, agents, crypto, and interactive media intersect.
-                Most of my projects try to connect research-style thinking
-                (clear problem statements, evaluation, ablations) with the messy
-                realities of latency, users, and actually shipping things.
+                where AI/ML, agents, crypto, and interactive media meet. I
+                enjoy taking research-style ideas – clear problem statements,
+                evaluation, ablations – and turning them into systems that
+                handle latency, real users, and the constraints of actually
+                shipping things.
               </p>
               <p>
-                I split my time between research and projects, AI
-                systems and UE5 experiments. Concretely, that&apos;s
-                looked like an NLP project on legal question answering,
-                building a visual commonsense dataset and evaluation harness
-                with Prof. Ernest Davis, and an AI x crypto signal dashboard
-                for high-priority trading and risk workflows.
+                Recently that has meant an NLP project on legal question
+                answering, building a visual commonsense dataset and evaluation
+                harness with Prof Ernest Davis, and designing an AI x crypto
+                signal dashboard for high-priority trading and risk workflows,
+                alongside UE5 experiments for narrative-driven projects.
               </p>
             </div>
           </div>
