@@ -65,7 +65,7 @@ export default function ProjectsPage() {
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           <ProjectCard
             title="NLP Final Project – Legal MCQA"
             tag="NLP · BERT · CaseHOLD"
