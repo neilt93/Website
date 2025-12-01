@@ -84,17 +84,14 @@ export default function InterestsPage() {
               "Integrating AI systems into interactive worlds",
             ]}
           />
-          <InterestCard
-            title="Writing & Humanities"
-            tag="Critique · Theory"
-            description="I also write in a more humanities-adjacent mode: criticism, comparative literature, and theory-driven essays. I like thinking about how technology, narrative, and power intersect."
-            bullets={[
-              "Essays on literature, performance, and tech",
-              "Notes and reflections that inform my projects",
-              "Bridging technical and humanistic perspectives",
-            ]}
-          />
         </div>
+
+        <p className="text-xs text-slate-500 sm:text-[0.8rem]">
+          <span className="font-medium">Other interests.</span> Competitive
+          gaming (usually top ~2,000 globally in Clash Royale, Grand Champion II
+          in Rocket League, peaked at rank 598 in Marvel Rivals), the gym, and
+          sports like football, rugby, badminton, table tennis, and fives.
+        </p>
       </section>
     </div>
   );

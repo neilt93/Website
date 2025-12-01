@@ -15,7 +15,7 @@ export default function ContactPage() {
           <p className="max-w-2xl text-sm text-slate-600">
             I&apos;m always open to talking about research, agents, crypto,
             UE5 experiments, or interesting products to build. The best way to
-            reach me is through GitHub or LinkedIn.
+            reach me is through email at: neiltripathi93@gmail.com.
           </p>
 
           <div className="flex flex-wrap gap-3 pt-2">
