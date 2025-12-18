@@ -145,8 +145,8 @@ export default function AboutPage() {
                 MongoDB, BigQuery, Supabase, AWS, Docker, REST APIs
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="font-medium">Languages</span>: English, Hindi,
-                Spanish, French
+                <span className="font-medium">Languages</span>: English (native),
+                Hindi (fluent), Spanish (intermediate), French (basic)
               </li>
             </ul>
           </div>
