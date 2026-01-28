@@ -118,7 +118,7 @@ export default function ExperiencePage() {
               Sep 2022 – Dec 2025 · New York, NY
             </p>
             <p className="pt-1.5 text-xs leading-relaxed text-slate-700 sm:text-[0.8rem]">
-              B.A. Computer Science, Minor: Mathematics, GPA: 3.77/4.00. Dean&apos;s
+              B.A. Computer Science, Minor: Mathematics. Dean&apos;s
               List (2023–2024, 2024–2025). Coursework: ML, AI, NLP, algorithms,
               operating systems, cryptography, databases.
             </p>

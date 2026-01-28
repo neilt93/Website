@@ -112,7 +112,7 @@ export default function ProjectsPage() {
             ]}
           />
           <ProjectCard
-            title="NLP Final Project — Legal MCQA"
+            title="NLP Final Project: Legal MCQA"
             tag="NLP · BERT · CaseHOLD"
             summary="NYU NLP project on legal multiple-choice QA over the CaseHOLD dataset, using BERT-based models and a new evaluation metric combining difficulty, confidence, and correctness."
             bullets={[

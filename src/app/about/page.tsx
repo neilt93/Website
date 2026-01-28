@@ -22,8 +22,8 @@ export default function AboutPage() {
               Neil Tripathi
             </h1>
             <p className="max-w-[38rem] text-pretty text-sm leading-relaxed text-slate-700 sm:text-base">
-              CS from NYU (B.A., Minor in Math, 3.77 GPA). I work across AI/ML,
-              agents, crypto, and interactive media — building systems that
+              CS from NYU (B.A., Minor in Math). I work across AI/ML,
+              agents, crypto, and interactive media, building systems that
               actually ship.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
@@ -82,7 +82,7 @@ export default function AboutPage() {
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Co-founding Physical.AI — data-driven marketplace for physical ads (top 6 at YC W25 hackathon)</span>
+                <span>Co-founding Physical.AI, a data-driven marketplace for physical ads (top 6 at YC W25 hackathon)</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
@@ -111,8 +111,8 @@ export default function AboutPage() {
             <div className="space-y-3 text-sm leading-relaxed text-slate-700 sm:text-[0.94rem]">
               <p>
                 I graduated from NYU with a B.A. in Computer Science and a Minor
-                in Mathematics (3.77 GPA, Dean&apos;s List 2023–2025). I like working
-                where AI/ML, agents, crypto, and interactive media meet — taking
+                in Mathematics (Dean&apos;s List 2023–2025). I like working
+                where AI/ML, agents, crypto, and interactive media meet, taking
                 research-style ideas and turning them into systems that handle
                 latency, real users, and the constraints of actually shipping.
               </p>

@@ -110,6 +110,7 @@ export default function PapersPage() {
               "Built a diagnostic benchmark (100 base + 100 counterfactual images; 100 questions + 100 flips) and automatic graders",
               "Evaluated six VLMs (ChatGPT, Claude, LLaVA, etc.) and analysed hallucination/abstention behavior",
             ]}
+            href="https://github.com/neilt93/Paper-with-Davis"
           />
 
           <PaperCard

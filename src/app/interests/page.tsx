@@ -77,7 +77,7 @@ export default function InterestsPage() {
           <InterestCard
             title="Robotics & Embodied AI"
             tag="Diffusion · OOD"
-            description="Currently exploring OOD detection for robot control policies — specifically using score-based methods to detect when a diffusion policy is operating outside its training distribution."
+            description="Currently exploring OOD detection for robot control policies, specifically using score-based methods to detect when a diffusion policy is operating outside its training distribution."
             bullets={[
               "Diffusion Policy replication on Push-T",
               "TAP-Score for (obs, action-chunk) rating",
