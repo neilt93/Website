@@ -14,7 +14,7 @@ export default function ContactPage() {
           </h1>
           <p className="max-w-2xl text-sm text-slate-600">
             I&apos;m always open to talking about research, agents, crypto,
-            UE5 experiments, or interesting products to build. The best way to
+            robotics, or interesting products to build. The best way to
             reach me is through email at: neiltripathi93@gmail.com.
           </p>
 
@@ -40,12 +40,10 @@ export default function ContactPage() {
           </div>
 
           <div className="pt-4 text-xs text-slate-500 sm:text-[0.8rem]">
-            <p>Based in New York City, NY</p>
+            <p>Based in San Francisco, CA</p>
           </div>
         </div>
       </section>
     </div>
   );
 }
-
-

@@ -57,7 +57,7 @@ export default function InterestsPage() {
           <InterestCard
             title="Research & Papers"
             tag="ML · Evaluation"
-            description="I like framing questions precisely, building datasets, and designing evaluation harnesses. I’ve worked on visual commonsense reasoning with Prof. Ernest Davis, focusing on “visibility” and how models represent what can or cannot be seen."
+            description="I like framing questions precisely, building datasets, and designing evaluation harnesses. I've worked on visual commonsense reasoning with Prof. Ernest Davis, focusing on &ldquo;visibility&rdquo; and how models represent what can or cannot be seen."
             bullets={[
               "Dataset and annotation design",
               "Evaluation scripts across multiple models",
@@ -75,20 +75,20 @@ export default function InterestsPage() {
             ]}
           />
           <InterestCard
-            title="UE5 & Interactive Media"
-            tag="UE5 · Real-time"
-            description="I’m exploring Unreal Engine 5 for narrative-driven experiences and prototypes. I’m interested in how game engines, AI, and storytelling can intersect, especially for spaces where player choice and systemic behavior matter."
+            title="Robotics & Embodied AI"
+            tag="Diffusion · OOD"
+            description="Currently exploring OOD detection for robot control policies — specifically using score-based methods to detect when a diffusion policy is operating outside its training distribution."
             bullets={[
-              "Small UE5 prototypes and experiments",
-              "Tooling and pipelines for iteration",
-              "Integrating AI systems into interactive worlds",
+              "Diffusion Policy replication on Push-T",
+              "TAP-Score for (obs, action-chunk) rating",
+              "Robustness testing under visual perturbations",
             ]}
           />
         </div>
 
         <p className="text-xs text-slate-500 sm:text-[0.8rem]">
           <span className="font-medium">Other interests.</span> Competitive
-          gaming (usually top ~2,000 globally in Clash Royale, Grand Champion II
+          gaming (usually top ~2,000 globally in Clash Royale, Grand Champion III
           in Rocket League, peaked at rank 598 in Marvel Rivals), the gym, and
           sports like football, rugby, badminton, table tennis, and fives.
         </p>
@@ -96,5 +96,3 @@ export default function InterestsPage() {
     </div>
   );
 }
-
-

@@ -1,10 +1,10 @@
 type TimelineItemProps = {
   title: string;
   meta: string;
-  text: string;
+  bullets: string[];
 };
 
-function TimelineItem({ title, meta, text }: TimelineItemProps) {
+function TimelineItem({ title, meta, bullets }: TimelineItemProps) {
   return (
     <article className="relative rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
       <div
@@ -18,9 +18,14 @@ function TimelineItem({ title, meta, text }: TimelineItemProps) {
         <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
           {meta}
         </p>
-        <p className="pt-1 text-xs leading-relaxed text-slate-700 sm:text-[0.8rem]">
-          {text}
-        </p>
+        <ul className="space-y-1 pt-1 text-xs leading-relaxed text-slate-700 sm:text-[0.8rem]">
+          {bullets.map((item) => (
+            <li key={item} className="flex gap-2">
+              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-slate-400" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </article>
   );
@@ -41,8 +46,7 @@ export default function ExperiencePage() {
             Experience
           </h1>
           <p className="max-w-2xl text-sm text-slate-600">
-            Roles from research, AI product work, teaching, and internships that
-            sit closest to how I actually build and ship things.
+            Roles across research, AI product work, teaching, and internships.
           </p>
         </div>
 
@@ -53,40 +57,83 @@ export default function ExperiencePage() {
           />
           <div className="space-y-6">
             <TimelineItem
-              title="AI Product & Research Intern · Sentient Foundation"
-              meta="May 2025 - Aug 2025 · New York City (Hybrid)"
-              text="Worked on AI product and research around agentic systems: ran market research and user cohort analysis using agent usage, designed evaluation datasets for the Unhinged Dobby model, and prototyped new features with the back-end team to improve agent pipelines and reliability."
+              title="AI Product & Research Intern · Sentient Labs"
+              meta="May 2025 – Aug 2025 · New York City, NY (Hybrid)"
+              bullets={[
+                "Built an internal evaluation suite of 100+ LLM prompts with automated scoring for tool-call correctness and safety-violation rate.",
+                "Improved feedback-to-ticket latency by 20% via regression harness and iteration notes; shipped 3 tool integrations with engineers.",
+                "Built a real-time crypto signals dashboard (2–3k lines backend TS, 1k lines frontend React) with latency under 2s for exchange data.",
+                "Prototyped 'Dobby Mode' agent (300-line Streamlit demo) using Dolphin Mistral; enforced JSON schema to reduce hallucinations.",
+              ]}
             />
             <TimelineItem
               title="Research with Prof. Ernest Davis · Visual Common Sense"
-              meta="Sep 2025 - Dec 2025 · NYU"
-              text="Co-authored work on benchmarking commonsense visual reasoning in vision-language models, including designing diagnostic datasets around visibility and occlusion and building automatic graders to detect hallucination and inconsistency."
+              meta="Sep 2025 – Dec 2025 · NYU"
+              bullets={[
+                "Built a diagnostic benchmark (100 base + 100 counterfactual images; 100 questions + 100 flips) and automatic graders.",
+                "Evaluated six VLMs (ChatGPT, Claude, LLaVA, etc.) and analysed hallucination/abstention behavior.",
+              ]}
             />
             <TimelineItem
               title="Teaching Assistant · Database Design, NYU"
-              meta="Jan 2025 - May 2025 · New York City, NY"
-              text="Led in-class sessions, taught SQL, MongoDB, Flask/Jinja, and schema design, and held office hours for 50+ students encountering relational models and databases for the first time."
+              meta="Jan 2025 – May 2025 · New York City, NY"
+              bullets={[
+                "Led recitations on SQL, MongoDB, Flask/Jinja, and schema design; supported 50+ students via office hours and grading.",
+              ]}
             />
             <TimelineItem
-              title="ML/Full-Stack Intern · 4mainstreet.ai"
-              meta="May 2024 - Sep 2024 · Fremont, CA (Remote)"
-              text="Built ML and data pipelines over customer voice and text data, integrated outputs into a Flutter front end, and fine-tuned Llama 3, Gemini, and GPT-3 models while keeping cloud compute usage under control."
+              title="ML & Full-Stack Intern · 4mainstreet.ai"
+              meta="May 2024 – Aug 2024 · Fremont, CA (Remote)"
+              bullets={[
+                "Built data pipelines for customer voice + text (4,000 records); integrated outputs into a Flutter front-end.",
+                "Built an evaluation harness to benchmark Llama 3 8B, Gemini, and GPT-class models on 4,000 labeled examples; computed precision/recall/F1 and surfaced failure modes to guide model selection.",
+              ]}
             />
             <TimelineItem
-              title="Blockchain Developer Intern · Scroll.io"
-              meta="May 2023 - Sep 2023 · New York City, NY (Remote)"
-              text="Created a Discord analytics tool for a 20K+ member community and automated data pipelines into Google BigQuery so the team could track growth and engagement."
-            />
-            <TimelineItem
-              title="Volunteer Robotics Instructor · Out of the Box Club"
-              meta="Jan 2021 - Sep 2021 · London, UK"
-              text="Taught children robotics with LEGO Mindstorms, helped them build small projects, and designed the club website to showcase their work."
+              title="Software Engineering Intern (Blockchain & Data) · Scroll.io"
+              meta="May 2023 – Aug 2023 · New York City, NY (Remote)"
+              bullets={[
+                "Built a Discord analytics tool for a 20K+ community; automated ingestion into BigQuery and cut manual reporting by 5 hours/week.",
+              ]}
             />
           </div>
+        </div>
+      </section>
+
+      {/* Education */}
+      <section
+        aria-labelledby="education-heading"
+        className="space-y-6"
+      >
+        <h2
+          id="education-heading"
+          className="text-xl font-semibold text-slate-900 sm:text-2xl"
+        >
+          Education
+        </h2>
+        <div className="space-y-4">
+          <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
+            <h3 className="text-sm font-semibold text-slate-900">New York University</h3>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              Sep 2022 – Dec 2025 · New York, NY
+            </p>
+            <p className="pt-1.5 text-xs leading-relaxed text-slate-700 sm:text-[0.8rem]">
+              B.A. Computer Science, Minor: Mathematics, GPA: 3.77/4.00. Dean&apos;s
+              List (2023–2024, 2024–2025). Coursework: ML, AI, NLP, algorithms,
+              operating systems, cryptography, databases.
+            </p>
+          </article>
+          <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
+            <h3 className="text-sm font-semibold text-slate-900">St Olave&apos;s Grammar School</h3>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              Sep 2016 – Jun 2022 · London, UK
+            </p>
+            <p className="pt-1.5 text-xs leading-relaxed text-slate-700 sm:text-[0.8rem]">
+              A levels: Mathematics, Further Mathematics, Computer Science, Physics (A* in each).
+            </p>
+          </article>
         </div>
       </section>
     </div>
   );
 }
-
-

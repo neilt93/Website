@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function AboutPage() {
   return (
     <div className="space-y-20 py-10 sm:space-y-24 sm:py-12 lg:space-y-28 lg:py-16">
-      {/* Hero-style about section (like the screenshot) */}
+      {/* Hero-style about section */}
       <section
         aria-labelledby="about-hero-heading"
         className="pt-2"
@@ -22,8 +22,9 @@ export default function AboutPage() {
               Neil Tripathi
             </h1>
             <p className="max-w-[38rem] text-pretty text-sm leading-relaxed text-slate-700 sm:text-base">
-              CS at NYU. I work across AI/ML, crypto, UE5, and writing, building
-              agents, experiments, and systems that actually ship.
+              CS from NYU (B.A., Minor in Math, 3.77 GPA). I work across AI/ML,
+              agents, crypto, and interactive media — building systems that
+              actually ship.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <a
@@ -33,7 +34,7 @@ export default function AboutPage() {
                 View Projects
               </a>
               <a
-                href="/Resume_6th_October_2025.pdf"
+                href="/Neil_Tripathi_Resume_Jan_2026.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full border border-[#e5e7eb] bg-white px-5 py-2.5 text-sm font-medium text-[var(--accent)] transition hover:border-[#cbd5f5] hover:bg-[var(--accent-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
@@ -73,7 +74,7 @@ export default function AboutPage() {
                   Neil Tripathi
                 </p>
                 <p className="text-xs text-slate-500">
-                  CS at NYU · AI/ML, crypto, UE5
+                  CS from NYU · San Francisco, CA
                 </p>
               </div>
             </div>
@@ -81,19 +82,19 @@ export default function AboutPage() {
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Working on AI image recognition for HVAC assembly parts</span>
+                <span>Co-founding Physical.AI — data-driven marketplace for physical ads (top 6 at YC W25 hackathon)</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Research on VLM common sense reasoning &amp; evaluation</span>
+                <span>Building Sympli, a voice-first health companion app (technical co-founder)</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Exploring UE5 and narrative-driven projects</span>
+                <span>TAP-Score: OOD detection for diffusion policies (Push-T)</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Exploring open deep search agents</span>
+                <span>Contract CV work for HVAC assembly part counting</span>
               </li>
             </ul>
           </aside>
@@ -109,19 +110,19 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-3 text-sm leading-relaxed text-slate-700 sm:text-[0.94rem]">
               <p>
-                I&apos;m a computer science student at NYU who likes working
-                where AI/ML, agents, crypto, and interactive media meet. I
-                enjoy taking research-style ideas like clear problem statements,
-                evaluation, and ablations, and turning them into systems that
-                handle latency, real users, and the constraints of actually
-                shipping things.
+                I graduated from NYU with a B.A. in Computer Science and a Minor
+                in Mathematics (3.77 GPA, Dean&apos;s List 2023–2025). I like working
+                where AI/ML, agents, crypto, and interactive media meet — taking
+                research-style ideas and turning them into systems that handle
+                latency, real users, and the constraints of actually shipping.
               </p>
               <p>
-                Recently that has meant an NLP project on legal question
-                answering, building a visual commonsense dataset and evaluation
-                harness with Prof Ernest Davis, and designing an AI x crypto
-                signal dashboard for high-priority trading and risk workflows,
-                alongside UE5 experiments for narrative-driven projects.
+                Recently that has meant co-founding Physical.AI (a data-driven
+                marketplace for physical ads, top 6 at YC W25 hackathon),
+                building Sympli (a voice-first health companion with a
+                HIPAA-aware AWS stack), working on TAP-Score for OOD detection
+                in diffusion policies, and research on visual commonsense
+                reasoning with Prof. Ernest Davis at NYU.
               </p>
             </div>
           </div>
@@ -132,20 +133,20 @@ export default function AboutPage() {
             </h2>
             <ul className="grid gap-2 text-sm text-slate-800 sm:text-[0.94rem]">
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="font-medium">AI/ML</span>: PyTorch, TensorFlow, LLM
-                fine-tuning, evaluation pipelines, model optimisation, BERTScore,
-                custom metrics
+                <span className="font-medium">AI/ML</span>: PyTorch, TensorFlow,
+                object detection, data augmentation, LLM fine-tuning, evaluation
+                pipelines, prompt design, agent tool use
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="font-medium">Programming</span>: Python, Java, C,
-                TypeScript, SQL, Rust, Solidity
+                <span className="font-medium">Programming</span>: Python, TypeScript,
+                SQL, Java, Rust, C
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
                 <span className="font-medium">Data &amp; Cloud</span>: Postgres,
                 MongoDB, BigQuery, Supabase, AWS, Docker, REST APIs
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="font-medium">Languages</span>: English (native),
+                <span className="font-medium">Languages</span>: English (fluent),
                 Hindi (fluent), Spanish (intermediate), French (basic)
               </li>
             </ul>
@@ -155,4 +156,3 @@ export default function AboutPage() {
     </div>
   );
 }
-

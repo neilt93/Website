@@ -101,24 +101,23 @@ export default function PapersPage() {
 
         <div className="space-y-6">
           <PaperCard
-            title="Benchmarking Commonsense Visual Reasoning in Vision-Language Models"
+            title="Benchmarking Commonsense Visual Reasoning for Vision-Language Models"
             role="Co-author"
-            venue="Research with Prof. Ernest Davis"
+            venue="Research with Prof. Ernest Davis (NYU)"
             year="2025 · Manuscript in preparation"
             summary="Diagnostic study of visual commonsense reasoning with a focus on visibility, occlusion, and viewpoint shifts in vision-language models."
             bullets={[
-              "Designed diagnostic datasets probing viewpoint and occlusion",
-              "Built automatic graders to detect hallucination and inconsistency",
-              "Evaluated GPT-4V, Gemini, and Claude variants for reliability metrics",
+              "Built a diagnostic benchmark (100 base + 100 counterfactual images; 100 questions + 100 flips) and automatic graders",
+              "Evaluated six VLMs (ChatGPT, Claude, LLaVA, etc.) and analysed hallucination/abstention behavior",
             ]}
           />
 
           <PaperCard
-            title="Evaluating Large Language Models for Legal Multiple Choice Question Answering"
+            title="Legal Text Classification with BERT and LegalBERT"
             role="Co-author"
             venue="NYU Natural Language Processing · Course project"
             year="2024"
-            summary="Applied transformer-based models to legal multiple choice question answering, introducing a new evaluation metric that combines question difficulty, model confidence, and correctness."
+            summary="Fine-tuned BERT-family models on legal corpora; compared against classical baselines with reproducible training and reporting."
             bullets={[
               "Compared BERT-Double, Legal-BERT, and Custom-Legal BERT models",
               "Implemented end-to-end NLP pipeline over legal case corpora",
@@ -132,5 +131,3 @@ export default function PapersPage() {
     </div>
   );
 }
-
-
