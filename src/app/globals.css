@@ -179,3 +179,28 @@ main > * {
   border: none;
   border-top: 1px solid #e5e7eb;
 }
+
+.prose-blog table {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.prose-blog th {
+  text-align: left;
+  font-weight: 600;
+  color: #0f172a;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.prose-blog td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.prose-blog tr:last-child td {
+  border-bottom: none;
+}
