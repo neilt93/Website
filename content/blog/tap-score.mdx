@@ -6,7 +6,7 @@ summary: "Building a scorer to catch bad robot actions, discovering that diffusi
 
 # TAP-Score: When Your Robot Policy Doesn't Need Help
 
-This is a write-up of a research project I've been working on at Penn State's Vision-Language Lab. The goal was straightforward: build a lightweight scorer that can tell when a robot policy is about to do something wrong, and use it to pick better actions. The reality turned out to be more interesting than the plan.
+This is a write-up of a research project I've been working on. The goal was straightforward: build a lightweight scorer that can tell when a robot policy is about to do something wrong, and use it to pick better actions. The reality turned out to be more interesting than the plan.
 
 ## The Problem
 
@@ -31,6 +31,8 @@ This was encouraging. The scorer clearly learns the expert action manifold and c
 ## Going Live with Diffusion Policy
 
 The real test was integrating TAP-Score with a live Diffusion Policy on [PushT](https://diffusion-policy.cs.columbia.edu/), a 2D benchmark where a circular end-effector pushes a T-shaped block into a target pose.
+
+<PushTDemo />
 
 The detection story held up: AUROC of 0.812 for distinguishing clean from perturbed rollouts, and 73.6% of failures flagged early (median flag at step 5 out of ~25 policy steps). But detection is only half the pitch. The real value would be **active reranking**: sample K action candidates from the policy, score each one with TAP, and pick the best.
 
@@ -57,8 +59,8 @@ The interesting contrast: under 50% occlusion (blocking half the observation wit
 | Metric | Clean | 50% Occlusion |
 |--------|-------|---------------|
 | Mean oracle improvement | +0.009 | +0.109 |
-| Fraction with improvement > 0.01 | 11% | 59% |
-| Fraction with improvement > 0.1 | ~1% | ~35% |
+| Fraction with improvement above 0.01 | 11% | 59% |
+| Fraction with improvement above 0.1 | ~1% | ~35% |
 
 That is a 12x increase in reranking potential. When the policy can see clearly, it does not need help. When its observations are degraded, candidates scatter, and a scorer becomes genuinely useful.
 
