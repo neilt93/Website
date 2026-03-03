@@ -56,11 +56,11 @@ This result independently corroborates a finding from Chi et al. (2025) in their
 
 The interesting contrast: under 50% occlusion (blocking half the observation with a black patch), headroom explodes.
 
-| Metric | Clean | 50% Occlusion |
-|--------|-------|---------------|
-| Mean oracle improvement | +0.009 | +0.109 |
-| Fraction with improvement above 0.01 | 11% | 59% |
-| Fraction with improvement above 0.1 | ~1% | ~35% |
+| Metric                                | Clean  | 50% Occlusion |
+|---------------------------------------|--------|---------------|
+| Mean oracle improvement               | +0.009 | +0.109        |
+| Fraction with improvement above 0.01  | 11%    | 59%           |
+| Fraction with improvement above 0.1   | ~1%    | ~35%          |
 
 That is a 12x increase in reranking potential. When the policy can see clearly, it does not need help. When its observations are degraded, candidates scatter, and a scorer becomes genuinely useful.
 
