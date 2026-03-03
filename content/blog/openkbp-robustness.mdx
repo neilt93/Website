@@ -4,8 +4,6 @@ date: "2026-03-01"
 summary: "Testing a 3D U-Net dose prediction model against adversarial attacks and clinically plausible CT perturbations. Only one type of corruption actually breaks it."
 ---
 
-# How Fragile Is AI-Planned Radiotherapy?
-
 Deep learning models for radiotherapy dose prediction are getting good. A well-trained 3D U-Net on the [OpenKBP](https://www.aapm.org/GrandChallenge/OpenKBP/) dataset can predict dose distributions for head-and-neck cancer patients that closely match clinical plans. But "good on clean data" is not the same as "safe to deploy." Before these models reach clinical use, we need to know what breaks them.
 
 This project tested robustness along two axes: adversarial attacks (worst-case) and clinically plausible CT perturbations (realistic-case).
