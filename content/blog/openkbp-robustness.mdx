@@ -1,0 +1,41 @@
+---
+title: "How Fragile Is AI-Planned Radiotherapy?"
+date: "2026-03-01"
+summary: "Testing a 3D U-Net dose prediction model against adversarial attacks and clinically plausible CT perturbations. Only one type of corruption actually breaks it."
+---
+
+# How Fragile Is AI-Planned Radiotherapy?
+
+Deep learning models for radiotherapy dose prediction are getting good. A well-trained 3D U-Net on the [OpenKBP](https://www.aapm.org/GrandChallenge/OpenKBP/) dataset can predict dose distributions for head-and-neck cancer patients that closely match clinical plans. But "good on clean data" is not the same as "safe to deploy." Before these models reach clinical use, we need to know what breaks them.
+
+This project tested robustness along two axes: adversarial attacks (worst-case) and clinically plausible CT perturbations (realistic-case).
+
+## The Model
+
+A 3D U-Net with 64 base filters, squeeze-and-excitation blocks, data augmentation, and PTV-weighted loss (4.0x weight on the planning target volume). Trained for 100 epochs on the OpenKBP dataset: 200 training patients, 40 validation, 40 test. Best model achieves a DVH Score of 2.535 and Dose Score of 3.731 Gy.
+
+## Adversarial Attacks: Yes, It Breaks
+
+FGSM and PGD attacks with small perturbation budgets produce dose predictions that look plausible but are clinically wrong. This is expected, it would be surprising if a neural network were robust to adversarial examples. The more useful question is whether the perturbations that actually happen in clinical practice cause similar failures.
+
+## Clinically Plausible Perturbations: Mostly Not
+
+We tested five types of corruption that can realistically occur in clinical CT scans, each at severity levels from L0 (minimal) through L5 (extreme):
+
+**P1 (Gaussian Noise):** Flat through L5. No meaningful degradation even at extreme noise levels.
+
+**P2 (Bone Density Shift):** Flat through L3, then takes off at L4-L5. The threshold is around 500 HU of bone shift, well beyond what occurs in normal clinical variation.
+
+**P3 (Bias Field):** Flat through L5. The model ignores smooth intensity gradients entirely.
+
+**P4 (Resolution Downsampling):** This is the one that breaks it. Degradation starts immediately at L1 and reaches +18.2% DVH error at L4. There is no safe threshold; any resolution reduction hurts.
+
+**P5 (Dental Artefact):** Flat through L5. Metal streak artefacts in the mouth region do not propagate to dose prediction errors.
+
+## The Takeaway
+
+Out of five clinically plausible perturbation types, only resolution matters. The model is remarkably robust to noise, bias fields, bone density shifts, and dental artefacts, even at amplitudes well beyond normal clinical variation. But it is sensitive to spatial resolution from the very first level of degradation.
+
+This has a practical implication: if you are deploying a dose prediction model, the thing to control is scan resolution and reconstruction parameters. The other sources of variation you might worry about (scanner noise, patient anatomy differences, metal implants) are unlikely to cause meaningful prediction errors.
+
+*Reports for this project are complete. The resolution sensitivity finding is the key result, and it suggests that quality control for AI-assisted radiotherapy should focus on spatial resolution above all other image quality metrics.*

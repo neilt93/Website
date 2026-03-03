@@ -1,0 +1,69 @@
+---
+title: "TAP-Score Part 2: Six Bugs Between Me and a Working Robot"
+date: "2026-03-03"
+summary: "Moving TAP-Score from a 2D pushing task to 7-DOF robotic arms. The simulator lied about everything."
+---
+
+# TAP-Score Part 2: Six Bugs Between Me and a Working Robot
+
+*This is part 2 of an ongoing series. [Part 1](/blog/tap-score) covers the original TAP-Score approach, PushT results, and the discovery that clean Diffusion Policy has almost nothing to rerank.*
+
+---
+
+In [Part 1](/blog/tap-score), I showed that TAP-Score achieves near-perfect offline detection (AUROC 0.998) but found that PushT's low action variance gives a reranker almost nothing to work with. The natural next step: move to harder tasks where the policy might actually produce diverse candidates.
+
+The target was [robomimic](https://robomimic.github.io/), specifically Lift (pick up a cube) and Can (pick up a can and place it in a bin) with 7-DOF robotic arms in MuJoCo. Higher-dimensional action spaces, harder manipulation, more room for candidate diversity.
+
+Getting there took five days and six critical bugs.
+
+## The Version Problem
+
+The pretrained Diffusion Policy checkpoints from Chi et al. were trained on an old fork of robosuite (v1.2.0). That fork requires mujoco_py, which is effectively dead, will not install on modern systems. The current robosuite (v1.5.2) uses native MuJoCo bindings and works fine on Windows. But it turns out "works fine" and "produces the same behaviour" are very different things.
+
+## Bug 1: Controllers That Ignore Their Config
+
+robosuite 1.5.2 silently ignores dict-based `controller_configs` passed through `env_meta`. The environment creates controllers with default settings regardless of what you specify. The Diffusion Policy checkpoints use absolute position control in world frame. The default is delta control in base frame. Every action the policy produced was being interpreted in the wrong coordinate system.
+
+**Fix:** Monkey-patch the live controller instances after environment creation. Set `input_type = "absolute"`, `input_ref_frame = "world"`, widen action bounds from [-1, 1] to [-10, 10] (the default clips axis-angle rotations, which have magnitude around 2.2), and boost `kp` from 150 to 500 for the new OSC dynamics. Then monkey-patch `reset()` to reapply all of this, because robosuite recreates controllers on every reset.
+
+## Bug 2: Wrong Initial States
+
+Calling `env.reset()` randomises the scene. But the checkpoints were trained on specific demonstration trajectories with specific initial states. Running the policy from random positions produces nonsense. This one was easy to spot, but easy to miss if you are not thinking about it.
+
+**Fix:** Load initial states from the HDF5 dataset and use `reset_to` for every episode.
+
+## Bug 3: The GIL Ate My GPU
+
+The first headroom audit attempt crashed my PC. I was running K=8 candidate branches in parallel using `ThreadPoolExecutor`, but each branch calls `predict_action()` on the GPU. Python's GIL serialises the GPU calls, so eight threads were fighting over one GPU lock while MuJoCo ate all the CPU. Everything ground to a halt.
+
+**Fix:** Replace threaded branching with batched lockstep rollout. One `predict_action(batch_size=K)` call per step instead of K individual calls. Episode time dropped from 133 seconds to 31.
+
+## Bug 4-5: Task-Specific Observation Quirks
+
+After all the controller fixes, Lift was running but only succeeding 10% of the time (expected: 95%+). I swept `kp` values. No effect. The policy was seeing the right observations, the controller was executing the right actions, but the robot kept missing the cube.
+
+I spent a full day on this before finding it: **the relative position vector `gripper_to_cube_pos` has a flipped sign in robosuite 1.5.2**. The old fork computed `eef_pos - cube_pos`. The new version computes `cube_pos - eef_pos`. The policy sees the gripper-to-cube vector pointing in the opposite direction and reaches the wrong way.
+
+One line fix: negate `object[7:10]` in the observation pipeline.
+
+**Result: 10/10 success, mean return 356.9.** From 10% to 100% with a sign flip.
+
+Can had a different problem entirely. robosuite 1.5.2 reorders the `object-state` fields compared to the old fork. The old order was `[abs_pos, abs_quat, rel_pos, rel_quat]`. The new order is `[rel_pos, rel_quat, abs_pos, abs_quat]`. The policy was reading absolute positions from the relative position slots and vice versa.
+
+**Fix:** Swap the halves back to old-fork order. Can went from 0% to 100%.
+
+## Bug 6: The Perturbation Pipeline
+
+Once clean rollouts worked, I needed perturbation rollouts (injecting noise, freezing observations, etc.) to test TAP-Score's detection. The perturbation code had its own bugs: hardcoded `object_dim=10` (Can has 14), `freeze_object` captured at the wrong timestep, and missing checkpoint validation keys. Six sub-fixes total before the perturbation pipeline was clean.
+
+## What I Learned
+
+The unglamorous truth about research engineering: most of the time is spent making the infrastructure work, not designing the model. TAP-Score itself took two days to implement. Getting robomimic to run correctly on modern robosuite took five. And every bug produced plausible-looking but completely wrong results. The 10% success rate looked like a tuning problem. It was a sign error.
+
+The stochasticity checks are encouraging: both Lift and Can produce diverse candidates (L2 spread of 0.004-0.005), which means there should be real headroom for reranking, unlike PushT where all candidates converged to the same action.
+
+## What's Next
+
+The headroom audits are running now: K=4 candidates, 20 episodes each for Lift and Can. If the oracle improvement is meaningfully above zero, TAP-Score reranking becomes viable for the first time. If it is not, that is also a finding worth reporting.
+
+*This project is ongoing. Part 3 will cover the headroom audit results and whether TAP-Score reranking actually works on 7-DOF manipulation tasks.*

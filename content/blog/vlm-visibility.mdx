@@ -1,0 +1,54 @@
+---
+title: "Do Vision-Language Models Understand What They Can See?"
+date: "2026-03-03"
+summary: "We built a benchmark to test whether VLMs can reason about visibility, occlusion, and what's in frame. Most of them struggle more than you'd expect."
+---
+
+# Do Vision-Language Models Understand What They Can See?
+
+*This is a preview of a paper in preparation with Prof. Ernest Davis at NYU. Results are from a frozen 100-family benchmark evaluated across 9 models.*
+
+---
+
+Here is a question that sounds trivial: if you show a vision-language model a photo where a cup is behind a laptop, can it tell you whether the cup is visible?
+
+It turns out this is harder than it looks. Not because the models lack visual acuity, but because visibility reasoning requires combining spatial understanding, occlusion logic, and common sense about how objects interact in 3D space.
+
+## The Benchmark
+
+We built a diagnostic benchmark using a 2x2 XOR design. For each of 100 "families," we create:
+
+- A **base image** and a **counterfactual image** (same scene, one key difference)
+- A **base question** and a **flipped question** (testing opposite visibility conditions)
+
+The XOR structure means a model cannot score well by always saying "yes" or always saying "no." It has to actually reason about the specific image-question pair. Getting one right by guessing makes the paired item wrong. This controls for response bias, which turns out to be a significant issue.
+
+## The Models
+
+We evaluated 9 VLMs across three tiers:
+
+- **Flagship:** Gemini 3.1 Pro, GPT-5, Claude Opus 4.5
+- **Prior-generation:** GPT-4o, Gemini 2.5 Pro, Claude 3.7 Sonnet
+- **Open-source:** Gemma 3 12B, InternVL3-8B, Qwen3-VL-8B
+
+## What We Found
+
+The headline result: **GPT-4o (0.728) and Gemini 3.1 Pro (0.727) are effectively tied at the top.** This is a prior-gen model matching the latest flagship, which was not what we expected.
+
+The more interesting finding is about GPT-5. It has the highest accuracy on questions it actually answers: **0.851**. But it abstains on 78 out of 300 headline items (26%). It says things like "I cannot determine this from the image" on questions where other models give correct answers. When you factor abstentions into the composite score, GPT-5 drops to **0.625**, well below GPT-4o.
+
+This is a design choice, not a capability gap. OpenAI appears to have tuned GPT-5 toward caution: refuse rather than risk a wrong answer. Whether that is the right trade-off depends on the application, but for a benchmark where you need to commit to an answer, it hurts.
+
+## Abstention Is the Elephant in the Room
+
+The abstention pattern is not unique to GPT-5, it is just the most extreme case. Claude Opus 4.5 and Claude 3.7 Sonnet also show elevated abstention rates compared to the Gemini family. The open-source models almost never abstain; they always commit to an answer, even when wrong.
+
+This creates a measurement problem. If you score abstentions as wrong (which we do), you penalise cautious models. If you exclude them, you get an inflated accuracy on a smaller sample. We report both: composite (including abstentions as errors) and answered-only accuracy. The gap between them tells you how much each model is hedging.
+
+## Why This Matters
+
+Visibility reasoning is a prerequisite for a lot of downstream tasks: robotic manipulation (is the grasp target visible?), autonomous driving (is the pedestrian occluded?), assistive technology (what can the user see from their position?). If VLMs cannot reliably answer "is object X visible in this scene?", they probably should not be trusted on tasks that depend on that judgement.
+
+The benchmark also reveals that newer and larger does not always mean better at spatial reasoning. GPT-4o outperforming GPT-5 on composite score suggests that the frontier models may be trading spatial accuracy for safety, or that visibility reasoning has not been a priority in recent training runs.
+
+*The paper is in preparation. I will share the arXiv link here when it is submitted.*
