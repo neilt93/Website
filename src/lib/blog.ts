@@ -7,6 +7,7 @@ export type PostMeta = {
   title: string;
   date: string;
   summary: string;
+  status?: "in-progress" | "complete";
 };
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -24,6 +25,7 @@ export function getAllPosts(): PostMeta[] {
       title: data.title as string,
       date: data.date as string,
       summary: data.summary as string,
+      status: (data.status as PostMeta["status"]) ?? undefined,
     };
   });
 
@@ -43,6 +45,7 @@ export function getPostBySlug(slug: string) {
       title: data.title as string,
       date: data.date as string,
       summary: data.summary as string,
+      status: (data.status as PostMeta["status"]) ?? undefined,
     },
     content,
   };

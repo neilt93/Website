@@ -53,13 +53,20 @@ export default async function BlogPostPage({
         </Link>
 
         <header className="space-y-2">
-          <p className="text-[0.7rem] font-medium uppercase tracking-wide text-slate-500">
-            {new Date(post.meta.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
+          <div className="flex items-center gap-2">
+            <p className="text-[0.7rem] font-medium uppercase tracking-wide text-slate-500">
+              {new Date(post.meta.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            {post.meta.status === "in-progress" && (
+              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wide text-amber-700">
+                In Progress
+              </span>
+            )}
+          </div>
           <h1 className="text-xl font-semibold text-slate-900 sm:text-2xl">
             {post.meta.title}
           </h1>
