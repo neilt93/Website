@@ -1,0 +1,88 @@
+---
+title: "TAP-Score: When Your Robot Policy Doesn't Need Help"
+date: "2026-03-02"
+summary: "Building a scorer to catch bad robot actions, discovering that diffusion policy barely produces any, and what that means for the project going forward."
+---
+
+# TAP-Score: When Your Robot Policy Doesn't Need Help
+
+This is a write-up of a research project I've been working on at Penn State's Vision-Language Lab. The goal was straightforward: build a lightweight scorer that can tell when a robot policy is about to do something wrong, and use it to pick better actions. The reality turned out to be more interesting than the plan.
+
+## The Problem
+
+In visuomotor imitation learning, you train a policy to mimic expert demonstrations. The dominant approach right now is [Diffusion Policy](https://diffusion-policy.cs.columbia.edu/) (Chi et al., 2024), which applies the denoising diffusion process to generate robot actions from noise, conditioned on what the robot currently sees. It works well, but it can silently fail. The policy produces actions that look plausible but lead to task failure, and there is no built-in mechanism to detect that.
+
+The question: **can we build an external scorer that flags when a proposed action is inconsistent with expert behaviour, and use it to select better actions?**
+
+## The Approach
+
+TAP-Score (Temporal Action-Proposal Scoring) is a contrastive two-tower model. One tower encodes observations (what the robot sees), the other encodes action chunks (what the robot plans to do). Both produce normalised embeddings, and the dot product between them gives a compatibility score.
+
+The training objective is InfoNCE: given an observation, the model must rank the true expert action above 15 negatives (a mix of random actions from other episodes, Gaussian-corrupted actions, and temporally permuted sequences). This forces the model to learn what "expert-like" behaviour actually looks like for a given observation.
+
+A quick note on what didn't work: the first version used binary cross-entropy classification. It completely collapsed. The model learned to output a constant score regardless of input and achieved ~50% accuracy on balanced data. With binary labels, there is no incentive to actually look at the observations. Switching to a ranking objective fixed this immediately.
+
+## Offline: Near-Perfect Detection
+
+On held-out synthetic failures (scaling, bias, stuck, delayed actions), TAP-Score hit an AUROC of 0.998. At a 1% false positive rate, it catches 94.3% of failures. At 5% FPR, it catches everything. These are corruptions the model never saw during training.
+
+This was encouraging. The scorer clearly learns the expert action manifold and can tell when something falls outside it.
+
+## Going Live with Diffusion Policy
+
+The real test was integrating TAP-Score with a live Diffusion Policy on [PushT](https://diffusion-policy.cs.columbia.edu/), a 2D benchmark where a circular end-effector pushes a T-shaped block into a target pose.
+
+The detection story held up: AUROC of 0.812 for distinguishing clean from perturbed rollouts, and 73.6% of failures flagged early (median flag at step 5 out of ~25 policy steps). But detection is only half the pitch. The real value would be **active reranking**: sample K action candidates from the policy, score each one with TAP, and pick the best.
+
+This is where things got interesting.
+
+## The Discovery: Nothing to Rerank
+
+To measure whether reranking could even help, I built a counterfactual branching framework. At each decision point, save the full physics state, fork the simulation K times (one per candidate), roll each forward L steps, and measure which candidate leads to the best outcome. This gives you the **oracle**: the best you could possibly do with perfect selection among the candidates.
+
+The results on clean (unperturbed) PushT:
+
+- **Mean oracle improvement: +0.009**
+- **Median oracle improvement: ~0**
+- Only 11% of decision points showed improvement above 0.01
+
+The candidates were nearly identical. The policy was generating the same action, plus or minus noise that made no meaningful difference to the outcome. There was literally nothing to rerank.
+
+## Why This Happens
+
+This result independently corroborates a finding from Chi et al. (2025) in their "Demystifying Diffusion Policy" paper: under clean observations, diffusion policy essentially **memorises** expert trajectories. A clean observation triggers reliable recall of a memorised action sequence, causing all K candidates to converge to the same thing.
+
+The interesting contrast: under 50% occlusion (blocking half the observation with a black patch), headroom explodes.
+
+| Metric | Clean | 50% Occlusion |
+|--------|-------|---------------|
+| Mean oracle improvement | +0.009 | +0.109 |
+| Fraction with improvement > 0.01 | 11% | 59% |
+| Fraction with improvement > 0.1 | ~1% | ~35% |
+
+That is a 12x increase in reranking potential. When the policy can see clearly, it does not need help. When its observations are degraded, candidates scatter, and a scorer becomes genuinely useful.
+
+## The Detection-Selection Gap
+
+Even when headroom exists (under occlusion), there is a subtler problem. TAP-Score trained on synthetic negatives (noise, permutation, mirroring) is excellent at detecting **obviously wrong** actions. But reranking asks it to choose the **best** among K plausible candidates, all of which are close to expert-like. The first reranking attempt with synthetic-negative-trained TAP actually performed worse than just picking randomly.
+
+The fix was retraining TAP with actual Diffusion Policy proposals as hard negatives. This yielded a modest +4 percentage point causal improvement in success rate (important nuance: the causal comparison is TAP-reranked K=4 vs. a no-TAP control that samples K=4 but always picks candidate 0, to control for the RNG state change from sampling multiple candidates).
+
+The deeper lesson: **detection and selection are fundamentally different tasks.** A perfect anomaly detector is not necessarily a good selector among near-expert candidates.
+
+## Moving to Robomimic
+
+Since PushT's low variance caps how much reranking can help, the project is now pivoting to [robomimic](https://robomimic.github.io/) benchmarks, specifically Lift and Can with 7-DOF robotic arms in MuJoCo. The hypothesis is that higher-dimensional action spaces (7 DOF vs. 2D) and harder manipulation tasks will produce more diverse candidates, giving TAP-Score more to work with.
+
+One early finding from the pivot: BC-RNN policies (another common architecture) are effectively deterministic, producing zero variance across K samples. Only Diffusion Policy CNN checkpoints actually generate stochastic proposals suitable for best-of-K evaluation. This is a critical gate that is easy to miss.
+
+## What I Learned
+
+A few takeaways from the project so far:
+
+- **Measure headroom before building the selector.** The counterfactual branching framework should have come first. If I had run the oracle diagnostic early, I would have known immediately that clean PushT was not the right testbed for reranking.
+- **Contrastive ranking beats classification.** Binary cross-entropy collapsed completely. InfoNCE forces the model to actually use the observations. This is a general lesson for any task where you are scoring compatibility between two modalities.
+- **Causal controls matter.** Comparing K=4 TAP vs. K=1 baseline is not a valid comparison because the RNG state changes when you sample more candidates. You need a no-TAP control with the same K to isolate the effect of the scorer.
+- **The best systems do not need help.** This sounds obvious in retrospect, but it is a useful framing. If a policy is reliably recalling the right behaviour, an external scorer adds nothing. The value is in the failure modes, and you need to design your system around that.
+
+The project is ongoing. The robomimic experiments should give a clearer picture of whether TAP-Score can be genuinely useful in settings where the policy produces more diverse candidates. More updates to come.
