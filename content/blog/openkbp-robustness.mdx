@@ -1,7 +1,7 @@
 ---
 title: "How Fragile Is AI-Planned Radiotherapy?"
 date: "2026-03-01"
-summary: "Testing a 3D U-Net dose prediction model against adversarial attacks and clinically plausible CT perturbations. Only one type of corruption actually breaks it."
+summary: "Testing a 3D U-Net dose prediction model against adversarial attacks and clinically plausible CT perturbations. Only one type of corruption actually breaks it. Now accepted for two conferences."
 ---
 
 Deep learning models for radiotherapy dose prediction are getting good. A well-trained 3D U-Net on the [OpenKBP](https://www.aapm.org/GrandChallenge/OpenKBP/) dataset can predict dose distributions for head-and-neck cancer patients that closely match clinical plans. But "good on clean data" is not the same as "safe to deploy." Before these models reach clinical use, we need to know what breaks them.
@@ -14,7 +14,7 @@ A 3D U-Net with 64 base filters, squeeze-and-excitation blocks, data augmentatio
 
 ## Adversarial Attacks: Yes, It Breaks
 
-FGSM and PGD attacks with small perturbation budgets produce dose predictions that look plausible but are clinically wrong. This is expected, it would be surprising if a neural network were robust to adversarial examples. The more useful question is whether the perturbations that actually happen in clinical practice cause similar failures.
+FGSM and PGD attacks with small perturbation budgets produce dose predictions that look plausible but are clinically wrong. This is expected; it would be surprising if a neural network were robust to adversarial examples. The more useful question is whether the perturbations that actually happen in clinical practice cause similar failures.
 
 ## Clinically Plausible Perturbations: Mostly Not
 
@@ -30,10 +30,28 @@ We tested five types of corruption that can realistically occur in clinical CT s
 
 **P5 (Dental Artefact):** Flat through L5. Metal streak artefacts in the mouth region do not propagate to dose prediction errors.
 
+## Summary Table
+
+| Perturbation | ACR Threshold | Severity Range | Max DVH Change | Max MAE Change |
+|---|---|---|---|---|
+| Noise | ~12 HU | 8-160 HU | 0.0-1.4% | 0.0-0.3% |
+| Bias Field | 5-7 HU | 10-200 HU | 0.0-0.4% | 0.0-0.2% |
+| Bone Density | 0+/-4 HU | 5-1000 HU | -0.6-11.2% | 0.0-5.0% |
+| Resolution | spec | 0.25-4.0 blur | 1.5-18.2% | 0.2-10.5% |
+| Dental Artefact | no-bias | 150-1200 HU | 0.3-0.9% | 0.0-0.0% |
+
 ## The Takeaway
 
 Out of five clinically plausible perturbation types, only resolution matters. The model is remarkably robust to noise, bias fields, bone density shifts, and dental artefacts, even at amplitudes well beyond normal clinical variation. But it is sensitive to spatial resolution from the very first level of degradation.
 
 This has a practical implication: if you are deploying a dose prediction model, the thing to control is scan resolution and reconstruction parameters. The other sources of variation you might worry about (scanner noise, patient anatomy differences, metal implants) are unlikely to cause meaningful prediction errors.
 
-*Reports for this project are complete. The resolution sensitivity finding is the key result, and it suggests that quality control for AI-assisted radiotherapy should focus on spatial resolution above all other image quality metrics.*
+## Update: Two Conference Submissions
+
+This work has been submitted to two conferences:
+
+**SERA 2026** (24th IEEE/ACIS International Conference on Software Engineering Research, Management and Applications), submitted March 2026. The paper covers both the adversarial evaluation and the full CT perturbation framework with DVH metrics.
+
+**ASTRO 2026** (68th Annual Meeting of the American Society for Radiation Oncology), abstract #79011, submitted February 2026. This is the flagship radiation oncology conference; the abstract focuses on the clinical generalisability angle and the resolution sensitivity finding. Co-authored with researchers from the University of Maryland Department of Radiation Oncology.
+
+The resolution sensitivity result is the one that matters clinically: it suggests that quality control for AI-assisted radiotherapy should prioritise spatial resolution above all other image quality metrics. If your CT reconstruction degrades resolution even slightly, the dose prediction degrades with it, and there is no safe margin.
