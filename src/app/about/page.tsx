@@ -22,9 +22,10 @@ export default function AboutPage() {
               Neil Tripathi
             </h1>
             <p className="max-w-[38rem] text-pretty text-sm leading-relaxed text-slate-700 sm:text-base">
-              CS from NYU (B.A., Minor in Math). I work across AI/ML,
-              agents, crypto, and interactive media, building systems that
-              actually ship.
+              CS from NYU (B.A., Minor in Math). I work on neural
+              controllers built from real connectome data, runtime safety
+              for robot learning policies, and temporal reasoning in
+              language models.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <a
@@ -82,19 +83,19 @@ export default function AboutPage() {
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                <span>Connectome locomotion: simulating 13K neurons from the Drosophila MANC VNC in MuJoCo, deploying to a physical hexapod</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                <span>TAP-Score: runtime failure detection for Diffusion Policy (Can AUROC 0.972, Lift obs-only 0.982)</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                <span>Temporal reasoning benchmark for LLMs: frontier models are more confidently wrong when timestamps are absent</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                 <span>Co-founding Physical.AI, a data-driven marketplace for physical ads (top 6 at YC W25 hackathon)</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Building Sympli, a voice-first health companion app (technical co-founder)</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>TAP-Score: OOD detection for diffusion policies (Push-T)</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Contract CV work for HVAC assembly part counting</span>
               </li>
             </ul>
           </aside>
@@ -111,18 +112,22 @@ export default function AboutPage() {
             <div className="space-y-3 text-sm leading-relaxed text-slate-700 sm:text-[0.94rem]">
               <p>
                 I graduated from NYU with a B.A. in Computer Science and a Minor
-                in Mathematics (Dean&apos;s List 2023–2025). I like working
-                where AI/ML, agents, crypto, and interactive media meet, taking
-                research-style ideas and turning them into systems that handle
-                latency, real users, and the constraints of actually shipping.
+                in Mathematics (Dean&apos;s List 2023-2025). My current work
+                sits at the intersection of computational neuroscience and
+                robotics: building locomotion controllers from real connectome
+                wiring diagrams, testing whether biological circuits fail in
+                more interpretable ways than learned policies, and deploying
+                the results on physical hardware.
               </p>
               <p>
-                Recently that has meant co-founding Physical.AI (a data-driven
-                marketplace for physical ads, top 6 at YC W25 hackathon),
-                building Sympli (a voice-first health companion with a
-                HIPAA-aware AWS stack), working on TAP-Score for OOD detection
-                in diffusion policies, and research on visual commonsense
-                reasoning with Prof. Ernest Davis at NYU.
+                Alongside the neuro work, I build runtime safety tools for
+                robot learning (TAP-Score), study temporal reasoning failures
+                in frontier LLMs, and have two papers under review (VLM
+                visibility benchmark with Prof. Ernest Davis at NYU, and
+                radiotherapy robustness at SERA + ASTRO 2026). Previously I
+                co-founded Physical.AI (top 6, YC W25 hackathon) and built
+                Sympli, a voice-first health companion with a HIPAA-aware
+                AWS stack.
               </p>
             </div>
           </div>
@@ -133,9 +138,9 @@ export default function AboutPage() {
             </h2>
             <ul className="grid gap-2 text-sm text-slate-800 sm:text-[0.94rem]">
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="font-medium">AI/ML</span>: PyTorch, TensorFlow,
-                object detection, data augmentation, LLM fine-tuning, evaluation
-                pipelines, prompt design, agent tool use
+                <span className="font-medium">AI/ML</span>: PyTorch, MuJoCo,
+                Brian2, diffusion models, LLM fine-tuning, object detection,
+                evaluation pipelines, agent tool use
               </li>
               <li className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
                 <span className="font-medium">Programming</span>: Python, TypeScript,
