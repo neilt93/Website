@@ -1,0 +1,90 @@
+---
+title: "Turning a Fly Connectome into a Walking Robot"
+date: "2026-03-15"
+summary: "I simulated 13,000 neurons from a real fruit fly nervous system, got emergent odor avoidance with no navigation logic, and now I'm putting it on a hexapod."
+status: "in-progress"
+---
+
+The thesis is simple: biological brains are not better at learning. They are better at being understood.
+
+I have been building a locomotion controller out of the actual wiring diagram of a fruit fly nervous system. Not a neural network trained to imitate fly behaviour. The real connectome, 13,101 neurons and 1.9 million synaptic connections from the Male Adult Nerve Cord (MANC), simulated as spiking neurons driving a physics-simulated fly body. The question is whether connectome-derived circuits are useful not because they outperform learned controllers, but because they fail in ways you can diagnose.
+
+This is a project log. Some results are clean, some are honest failures, and some surprised me.
+
+---
+
+## The Setup
+
+The architecture has two halves. The brain side is a Brian2 spiking network (leaky integrate-and-fire neurons) wired according to the FlyWire connectome, roughly 139,000 neurons total. The body side is FlyGym, which wraps MuJoCo around an anatomically accurate Drosophila model with 42 degrees of freedom (seven joints per leg, six legs). A sensory encoder maps body observations into neural firing rates, the brain processes them, and a descending decoder maps readout neuron activity back into motor commands that modulate a central pattern generator.
+
+The closed loop runs at 20ms per brain step, with 200 body physics steps per brain step. Walking speed from the brain-driven controller comes out to roughly 21.9 mm/s. Real Drosophila walk at 20 to 30 mm/s. That is not a tuned match; it falls out of the connectome wiring and the physics.
+
+## What Actually Worked
+
+### Causal Ablation: 10/10 Tests Pass
+
+This is the strongest result. If you remove the turn-left descending neurons from the brain, the fly drifts right. Remove turn-right, it drifts left. Remove forward drive neurons, it slows down. Remove all readout neurons, the fly stops responding entirely. Ten out of ten ablation tests produce the predicted behavioural change.
+
+This matters because it means the controller is not a black box. You can point at a specific population of 9 neurons and say: these are responsible for left turning. Remove them, left turning disappears. That is the kind of interpretability you do not get from a policy trained end-to-end.
+
+### Sensory Perturbation: 9/10 Hypotheses Confirmed
+
+I ran seven perturbation conditions: baseline, contact loss on the left and right legs, gustatory stimulation on the left and right sides, lateral push, and a combined condition. Nine of ten hypothesis tests pass.
+
+The cleanest result is the gustatory contrast. Stimulating taste neurons on the left produces a heading change of -2.2 degrees. Stimulating the right produces +9.1 degrees. That is 11.3 degrees of separation between left and right food signals, emerging from the connectome wiring. The brain distinguishes which side the food is on, and the turn circuits respond accordingly.
+
+Vestibular input is the strongest driver overall: a lateral push produces the largest turn-drive shift of any condition (-0.121). When left contact is lost, the turn-left/turn-right neural rate shifts by 3.2 Hz toward right-turning, which is biologically correct: lose left ground, turn right to re-establish contact.
+
+The one failure: the combined condition (contact loss + gustatory, both on the left) is not stronger than single contact loss on the right. Possible interference between converging perturbation signals. Honest failure.
+
+### Odor Avoidance From Wiring Alone
+
+This one surprised me. After expanding the sensory input from 75 to 275 neurons (adding 100 olfactory receptor neurons and 100 visual photoreceptors from the FlyWire Codex annotations), I ran the first chemotaxis experiment. Inject an odor signal biased to the left antenna, see what happens.
+
+The fly turns right. Inject it biased to the right antenna, the fly turns left. Consistently, across trials. The direction of avoidance flips with the stimulus side.
+
+There is no navigation logic anywhere in the code. No reward signal, no gradient following, no engineered chemotaxis. The odor signals propagate through the connectome's antennal lobe and mushroom body circuits, and turning behaviour comes out the other end. This is the kind of result that makes you stare at the screen for a moment.
+
+### The DNb05 Bottleneck
+
+While mapping descending neuron populations, I found that the entire hygrosensory modality (humidity sensing) is gated by exactly two neurons: DNb05 left and DNb05 right. Ablate them and the fly loses all humidity response. Two neurons out of 139,000 form a complete information bottleneck for an entire sensory channel. This kind of structural finding is what connectome data is for.
+
+## What Did Not Work
+
+### Flex/Ext Alternation: Honest Failure
+
+The literature says antagonist muscle groups should show anti-phase oscillation during locomotion. I tried to get this from half-center CPG circuits in the connectome, scaling inhibitory weights up to 20 times their baseline strength. No anti-phase achieved. The minimal 1,000-neuron circuit does not have enough CPG interneurons to produce the flex/ext alternation that the full VNC contains. This is a genuine limitation of the minimal model.
+
+### Topology Learning: Negative Result
+
+I tested whether the connectome's specific wiring topology matters by comparing it against random sparse networks with the same sparsity level. Random networks match the connectome's performance. The finding is: sparsity matters, specific wiring does not, at least at the locomotion level. This is a publishable negative result, and it tempers the narrative. The connectome's value is not in the exact wiring but in the interpretable structure it provides for analysis.
+
+### Emergent Oscillation: Partially Explained
+
+The brain produces a population oscillation at roughly 6 Hz that falls out of the MANC wiring plus neuronal adaptation. It is not a tuned oscillator; it emerges from the interaction of excitatory/inhibitory balance and spike-frequency adaptation. I can observe it but cannot yet fully explain why 6 Hz specifically.
+
+## The Gait Initialisation Finding
+
+This one is a real neuroscience result, not an engineering artefact. Brain-derived descending signals alone are not sufficient for locomotion. The tripod gait pattern, the specific phase relationships between the six legs (`[0, pi, 0, pi, 0, pi]`), must be initialised at the motor/VNC level. If you set all phases to zero, all six legs synchronise and the fly bounces catastrophically.
+
+The brain modulates speed and direction, but the coordinated leg pattern is a spinal-cord-level property. This mirrors what real neuroscience shows about Drosophila: locomotion is generated by VNC central pattern generators, the brain provides high-level commands. I found this by debugging a bug, but it turns out to be biology.
+
+## What Comes Next: A Real Hexapod
+
+I ordered a Waveshare HexArth hexapod, an 18-DOF platform with 30kg bus servos that report position, load, and voltage. It has a 9-axis IMU, aluminium and carbon fibre frame, and an ESP32 controller. The servo feedback is the critical feature: it gives us closed-loop proprioception that maps onto the sensory encoder I already built.
+
+The plan is sim-to-real transfer. Take the connectome controller that works in MuJoCo, deploy it on physical hardware, and see what breaks. The interpretability advantage should matter most here: when the real robot stumbles, I can trace the failure through specific neuron populations instead of staring at a loss curve.
+
+I am also talking to Pavan Ramdya at EPFL, whose lab built NeuroMechFly v2 with full vision and olfaction. We built the motor control layer. They built the sensory layer. Together it would be the first complete sensory-brain-motor closed loop through a real connectome.
+
+## Why This Matters
+
+There are two ways to build a locomotion controller. Train a policy end-to-end and get something that works but cannot be interrogated. Or wire one from biological data and get something that may not work as well, but fails in ways you can trace to specific neurons, specific circuits, specific bottlenecks.
+
+I think the second approach has been underexplored. The connectome data exists now (FlyWire, 139,000 neurons, fully annotated). The physics simulators exist (MuJoCo, FlyGym). The gap is connecting them into closed-loop systems and asking whether the resulting controllers are useful, not just biologically faithful.
+
+The early results suggest they are. Causal ablation works. Sensory perturbation produces biologically correct responses. Behaviours emerge from wiring that no one engineered. And when something fails, like the flex/ext alternation, you can point at the structural reason: not enough CPG interneurons in the minimal circuit.
+
+That is the pitch. Not that connectome controllers are better. That they are more understandable. And in safety-critical robotics, understandable might be what matters.
+
+*This project is ongoing. Next up: HexArth hardware integration, the Ramdya collaboration, and the walking-to-flight mode switching experiment.*
