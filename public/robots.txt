@@ -1,0 +1,23 @@
+# https://neiltripathi.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Allow major AI crawlers (researcher portfolio, want discoverability)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Disallow Next.js internals and private assets
+Disallow: /_next/
+Disallow: /api/
+
+Sitemap: https://neiltripathi.com/sitemap.xml

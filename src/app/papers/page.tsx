@@ -101,16 +101,59 @@ export default function PapersPage() {
 
         <div className="space-y-6">
           <PaperCard
-            title="Benchmarking Commonsense Visual Reasoning for Vision-Language Models"
-            role="Co-author"
-            venue="Research with Prof. Ernest Davis (NYU)"
-            year="2025 · Manuscript in preparation"
-            summary="Diagnostic study of visual commonsense reasoning with a focus on visibility, occlusion, and viewpoint shifts in vision-language models."
+            title="TAP-Score: Runtime Failure Detection for Diffusion Policy"
+            role="Independent research"
+            venue="Writeup in progress"
+            year="Jan 2026 – Present"
+            summary="Supervised risk predictor trained on real visuomotor rollouts that detects when a Diffusion Policy will fail before execution completes, enabling selective execution and closed-loop recovery."
             bullets={[
-              "Built a diagnostic benchmark (100 base + 100 counterfactual images; 100 questions + 100 flips) and automatic graders",
-              "Evaluated six VLMs (ChatGPT, Claude, LLaVA, etc.) and analysed hallucination/abstention behavior",
+              "AUROC 0.972 on Can and 0.982 (obs-only) on Lift under zero-object perturbation",
+              "Selective execution: 100% success at 20% coverage versus 45% baseline",
+              "Action-conditioned world-model guardrail; fusion with risk predictor reaches AUROC 0.923",
+            ]}
+            href="https://github.com/neilt93/TAP-Score"
+          />
+
+          <PaperCard
+            title="Temporal-Bench: Do Frontier LLMs Know When Their Context Is Stale?"
+            role="Independent research"
+            venue="Paper in preparation"
+            year="Mar 2026 – Present"
+            summary="Benchmark testing whether LLMs recognise when their context is stale. Headline finding: more capable models are more confidently wrong when timestamps are absent."
+            bullets={[
+              "GPT-5.4: 100% false trust without timestamps, 0% with",
+              "Claude Opus: 100% switch sensitivity, 84.6% false trust without timestamps",
+              "Fine-tuned GPT-2 and TinyLlama baselines with time-conditioned inputs",
+            ]}
+            href="https://github.com/neilt93/temporal-bench"
+          />
+
+          <PaperCard
+            title="Benchmarking Commonsense Visual Reasoning for Vision-Language Models"
+            role="Co-author with Prof. Ernest Davis (NYU)"
+            venue="arXiv cs.AI"
+            year="Submitted Mar 2026"
+            summary="Visibility-reasoning benchmark for vision-language models with a 2×2 XOR design across 100 families and 300 headline cells, with automated graders and scoring."
+            bullets={[
+              "Evaluated 9 VLMs across three tiers (flagship, prior-gen, open-source)",
+              "Surfaced a 26% abstention rate in GPT-5 as a key finding",
+              "Top scores: GPT-4o (0.728) and Gemini 3.1 Pro (0.727) effectively tied",
             ]}
             href="https://github.com/neilt93/Paper-with-Davis"
+          />
+
+          <PaperCard
+            title="Adversarial Robustness of 3D U-Net Radiation Therapy Dose Prediction"
+            role="Co-author"
+            venue="Submitted to SERA 2026 (IEEE/ACIS) and ASTRO 2026"
+            year="2025 – 2026"
+            summary="Evaluated adversarial (FGSM/PGD) and clinically plausible CT perturbations on the OpenKBP dataset using clinical DVH metrics."
+            bullets={[
+              "Identified resolution downsampling as the only perturbation with immediate clinical impact",
+              "Bone shift late takeoff at level 4-5; noise, bias field, and dental flat through extreme amplitudes",
+              "Junior Investigator Travel Award application for ASTRO 2026",
+            ]}
+            href="https://github.com/neilt93/OpenKBP-Project"
           />
 
           <PaperCard

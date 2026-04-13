@@ -60,74 +60,102 @@ export default function ProjectsPage() {
             Selected Projects
           </h1>
           <p className="max-w-2xl text-sm text-slate-600">
-            A few projects that represent how I like to design, build, and ship
-            things.
+            A mix of research, infrastructure, and product work. Most of it goes
+            from paper to running code to real users or real hardware.
           </p>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           <ProjectCard
+            title="TAP-Score"
+            tag="Research · Robot Learning"
+            summary="Runtime failure detection for Diffusion Policy: predicts when a visuomotor policy will fail so the robot can abstain and dramatically improve success rates."
+            bullets={[
+              "AUROC 0.972 on Can and 0.982 (obs-only) on Lift under zero-object perturbation",
+              "Selective execution: 100% success at 20% coverage vs 45% baseline",
+              "World-model guardrail fused with risk predictor reaches AUROC 0.923",
+            ]}
+            href="https://github.com/neilt93/TAP-Score"
+          />
+          <ProjectCard
+            title="Connectome-Driven Locomotion"
+            tag="Research · Neuro-Robotics"
+            summary="Biologically-inspired locomotion controller: simulates the full 13,101-neuron Drosophila ventral nerve cord in Brian2 + FlyGym, then deploys to a physical hexapod."
+            bullets={[
+              "Minimal 1,000-neuron circuit preserves tripod gait and causal ablation results",
+              "Emergent odor avoidance from connectome wiring alone (no engineered navigation)",
+              "Sim-to-real on a Waveshare HexArth 18-DOF Dynamixel hexapod",
+            ]}
+            href="https://github.com/neilt93/Fly-Brain-AI"
+          />
+          <ProjectCard
+            title="Temporal-Bench"
+            tag="Research · LLM Eval"
+            summary="Do frontier LLMs know when their context is stale? Headline finding: more capable models are more confidently wrong without timestamps."
+            bullets={[
+              "GPT-5.4: 100% false trust without timestamps, 0% with",
+              "Claude Opus: 100% switch sensitivity, 84.6% false trust without timestamps",
+              "Fine-tuned GPT-2 + TinyLlama baselines; paper in preparation",
+            ]}
+            href="https://github.com/neilt93/temporal-bench"
+          />
+          <ProjectCard
+            title="Crypto Safety Wallet"
+            tag="Agents · Safety"
+            summary="LLM-native crypto wallet with a 4-check safety engine on Base. Natural-language intents across send, swap, batch, chain, streaming, and bridging."
+            bullets={[
+              "4-check safety pipeline: simulation, approval scope, reputation, semantic review",
+              "170-case eval suite including 32 adversarial tests across 6 attack categories",
+              "NEAR Intents Skills API with policy layer and bridge adapter",
+            ]}
+          />
+          <ProjectCard
+            title="Prediction Market Agent"
+            tag="Forecasting · LLM"
+            summary="Local-first prediction market forecasting agent with LLM-driven sub-question decomposition, devil's advocate debate, and automated Kalshi trading."
+            bullets={[
+              "Backtested across 229 markets with Qwen 14B: 80% directional accuracy",
+              "Brier score 0.0033; dynamic ECE thresholds for position sizing",
+              "LightGBM calibration layer + automated position management",
+            ]}
+            href="https://github.com/neilt93/Prediction-Market-Agent"
+          />
+          <ProjectCard
             title="Physical.AI"
             tag="Co-Founder · SF"
-            summary="Data-driven marketplace for physical ads. Built a Zillow-style discovery experience on a map; achieved top 6 at YC W25 hackathon finals out of 100+ teams."
+            summary="Data-driven marketplace for physical ads. Zillow-style discovery on a map, top 6 at YC W25 hackathon finals out of 100+ teams."
             bullets={[
-              "Integrated live attention score using Caltrans PeMS traffic data to estimate OTS volume, dwell time, and impact by time of day",
-              "Backend ingests ad placements, maps to nearby sensors, computes metrics against historical baselines, and surfaces ticker-style scores",
+              "Live attention score derived from Caltrans PeMS traffic data (OTS volume, dwell time)",
+              "Backend ingests placements, maps to nearby sensors, computes scores against baselines",
             ]}
           />
           <ProjectCard
             title="Sympli"
-            tag="Technical Co-Founder"
-            summary="Voice-first health companion app. Built voice intake → clinician-style note pipeline (ASR + summarization) with latency under 1 minute."
+            tag="Technical Co-Founder · On-Hold"
+            summary="Voice-first health companion. Voice intake → clinician-style note pipeline (ASR + summarisation) with latency under 1 minute."
             bullets={[
-              "Deployed HIPAA-aware AWS stack (TypeScript + Postgres + self-hosted LLM)",
-              "Shipped alpha to 20 users (100+ sessions) with end-to-end instrumentation",
+              "HIPAA-aware AWS stack: TypeScript, Postgres, self-hosted LLM",
+              "Shipped alpha to 20 users (100+ sessions)",
             ]}
+            href="https://github.com/neilt93/Sympli-Prototype"
           />
           <ProjectCard
-            title="TAP-Score (Push-T OOD Detection)"
-            tag="Research · PyTorch"
-            summary="Replicated Diffusion Policy on Push-T; built TAP-Score to rate (obs, action-chunk) pairs using demo positives + shuffled/noisy negatives."
-            bullets={[
-              "Tested OOD detection under brightness/noise/occlusion perturbations",
-              "Reporting AUROC and clean false-alarm rate with score traces",
-            ]}
-          />
-          <ProjectCard
-            title="1:72 Scale HVAC Assembly Part Counter"
+            title="HVAC Assembly Part Counter"
             tag="Computer Vision · Contract"
             summary="Freelance CV project to count small parts in 1:72 HVAC assembly kits from video and image data. Delivered an iOS app for real-time part counting."
             bullets={[
-              "Trained object detector across 14 part classes; achieved 95% accuracy on a 1,200-image test set",
-              "Improved robustness to lighting variance and motion blur; optimised latency to under 5s on iPhone 16 Pro",
+              "Trained object detector across 14 part classes; 95% accuracy on a 1,200-image test set",
+              "Optimised latency to under 5s on iPhone 16 Pro",
             ]}
-          />
-          <ProjectCard
-            title="Transformer LM from Scratch"
-            tag="PyTorch · Personal"
-            summary="Implemented a Transformer language model from scratch in PyTorch; trained on an anonymised corpus (2.6M tokens)."
-            bullets={[
-              "Reached validation perplexity of 15",
-              "Full implementation of attention, positional encoding, and training loop",
-            ]}
-          />
-          <ProjectCard
-            title="NLP Final Project: Legal MCQA"
-            tag="NLP · BERT · CaseHOLD"
-            summary="NYU NLP project on legal multiple-choice QA over the CaseHOLD dataset, using BERT-based models and a new evaluation metric combining difficulty, confidence, and correctness."
-            bullets={[
-              "Compared BERT-Double, Legal-BERT, and Custom-Legal BERT models",
-              "Implemented end-to-end NLP pipeline over legal case corpora",
-            ]}
-            href="https://github.com/rachelren2025/NLP_Final_Project"
+            href="https://github.com/neilt93/HVAC-project"
           />
           <ProjectCard
             title="Crypto Signal Dashboard"
-            tag="AI x Crypto · TypeScript"
-            summary="Real-time dashboard for monitoring high-priority crypto trading and risk signals. 2–3k lines backend TS, 1k lines frontend React with sub-2s latency."
+            tag="AI x Crypto · Sentient Labs"
+            summary="Real-time dashboard for whale movements, volume anomalies, and notable trader activity using Nansen on-chain data. Built at Sentient Labs."
             bullets={[
-              "Defined key signals across on-chain and exchange data",
-              "Designed for quick, actionable decision-making with streaming aggregation",
+              "2–3k lines backend TypeScript, ~1k lines frontend React",
+              "Streaming aggregation with sub-2s latency on exchange data",
             ]}
             href="https://github.com/neilt93/Crypto-signal-dashboard"
           />
