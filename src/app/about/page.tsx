@@ -35,7 +35,7 @@ export default function AboutPage() {
                 View Projects
               </a>
               <a
-                href="/Neil_Tripathi_Resume_Jan_2026.pdf"
+                href="/Neil_Tripathi_Resume_Apr_2026.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full border border-[#e5e7eb] bg-white px-5 py-2.5 text-sm font-medium text-[var(--accent)] transition hover:border-[#cbd5f5] hover:bg-[var(--accent-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
