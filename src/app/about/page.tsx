@@ -83,7 +83,7 @@ export default function AboutPage() {
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                <span>Research Engineer at Cybernetic AI (since March): RoboEval platform, FIPER/Sentinel runtime diagnostics, SmolVLA and GR00T sim-to-real on SO-101 and Franka</span>
+                <span>ML Engineer (part-time) at Cybernetic Labs since March: VLM-as-Judge evaluation, Isaac Sim sim-to-real fixes, 2-camera SmolVLA deployment on SO-101</span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
@@ -124,10 +124,12 @@ export default function AboutPage() {
                 the results on physical hardware.
               </p>
               <p>
-                Day-to-day I&apos;m a Research Engineer at Cybernetic AI
-                (since March 2026), working on runtime failure diagnostics
-                (FIPER, Sentinel) and sim-to-real pipelines for the RoboEval
-                evaluation platform. Alongside that I build TAP-Score for
+                Part of my week goes to Cybernetic Labs, where I&apos;m an
+                ML Engineer (since March 2026) working on robot policy
+                evaluation infrastructure for sim-to-real manipulation:
+                VLM-as-Judge evaluation, Isaac Sim sim-to-real fixes, and
+                SmolVLA deployment on the SO-101 arm. Alongside that I build
+                TAP-Score for
                 Diffusion Policy, study temporal reasoning failures in
                 frontier LLMs, and have a radiotherapy-robustness paper
                 accepted at SERA 2026 plus a VLM visibility benchmark
