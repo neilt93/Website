@@ -83,6 +83,10 @@ export default function AboutPage() {
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               <li className="flex gap-3">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                <span>Research Engineer at Cybernetic AI (since March): RoboEval platform, FIPER/Sentinel runtime diagnostics, SmolVLA and GR00T sim-to-real on SO-101 and Franka</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                 <span>Connectome locomotion: simulating 13K neurons from the Drosophila MANC VNC in MuJoCo, deploying to a physical hexapod</span>
               </li>
               <li className="flex gap-3">
@@ -120,11 +124,14 @@ export default function AboutPage() {
                 the results on physical hardware.
               </p>
               <p>
-                Alongside the neuro work, I build runtime safety tools for
-                robot learning (TAP-Score), study temporal reasoning failures
-                in frontier LLMs, and have two papers under review (VLM
-                visibility benchmark with Prof. Ernest Davis at NYU, and
-                radiotherapy robustness at SERA + ASTRO 2026). Previously I
+                Day-to-day I&apos;m a Research Engineer at Cybernetic AI
+                (since March 2026), working on runtime failure diagnostics
+                (FIPER, Sentinel) and sim-to-real pipelines for the RoboEval
+                evaluation platform. Alongside that I build TAP-Score for
+                Diffusion Policy, study temporal reasoning failures in
+                frontier LLMs, and have a radiotherapy-robustness paper
+                accepted at SERA 2026 plus a VLM visibility benchmark
+                submitted with Prof. Ernest Davis at NYU. Previously I
                 co-founded Physical.AI (top 6, YC W25 hackathon) and built
                 Sympli, a voice-first health companion with a HIPAA-aware
                 AWS stack.
